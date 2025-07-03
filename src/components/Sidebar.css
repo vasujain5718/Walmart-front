@@ -1,0 +1,138 @@
+/* Sidebar.css */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+}
+
+.mobile-sidebar-wrapper {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+.mobile-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+  color: #bbb;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s forwards;
+}
+
+.nav-button:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: 4px;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 16rem;
+  margin: 1rem;
+  z-index: 40;
+  transition: all 0.7s ease;
+  transform: translateX(-100%);
+  opacity: 0;
+  border-radius: 16px;
+
+  box-shadow: inset 0 0 30px #39E0C740, 0 0 10px #39E0C720;
+}
+
+.sidebar.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar-inner {
+  padding: 1.5rem;
+  background: black;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  height: 100%;
+}
+
+.sidebar-header {
+  margin-bottom: 2rem;
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.sidebar-subtitle {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #bbb;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s forwards;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon {
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover .icon {
+  color: #0ea5e9; /* Light blue on hover */
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
