@@ -27,7 +27,7 @@ const SalesAnalyticsChart = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const res = await fetch(`http://walmart-back.onrender.com/api/admin/sales/product-trends?range=180`);
+        const res = await fetch(`https://walmart-back.onrender.com/api/admin/sales/product-trends?range=180`);
         const json = await res.json();
 
         const products = new Set();
