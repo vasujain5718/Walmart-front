@@ -1,0 +1,48 @@
+/* ML.css */
+.loading-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #050505, #0a0a0a, #08080f);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Custom scrollbar for luxury look */
+.restock-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #39E0C7 #181f23;
+}
+
+/* Chrome, Edge, Safari */
+.restock-scroll::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 8px;
+  background: #181f23;
+}
+.restock-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #39E0C7 30%, #FFD700 100%);
+  border-radius: 8px;
+  min-height: 40px;
+}
+.restock-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #40ffaa 0%, #FFD700 100%);
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.loading-message {
+  margin-top: 20px;
+  color: #ccc;
+  font-size: 1.1rem;
+  max-width: 500px;
+  line-height: 1.5;
+  padding: 0 20px;
+}
+

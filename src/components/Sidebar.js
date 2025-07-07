@@ -1,10 +1,12 @@
 import { ChartLine, Robot, Trophy, TrendUp } from "phosphor-react";
 import { useState, useEffect } from "react";
-import './Sidebar.css'; // Make sure to create and import this
+import { useLocation } from "react-router-dom";
+import './Sidebar.css';
 
 const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -13,7 +15,7 @@ const Sidebar = () => {
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-    
+
     const timer = setTimeout(() => setIsVisible(true), 500);
 
     return () => {
@@ -22,15 +24,29 @@ const Sidebar = () => {
     };
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  // Custom handler for navigation and scrolling
+  const handleNavClick = (item) => {
+    if (item.id === 'ai-chatbot') {
+      window.open('/ml', '_blank');
+    } else if (item.id === 'top-products') {
+      window.open('/prod', '_blank');
+    } else if (item.id === 'sales-graph') {
+      // Scroll to Chart section
+      setTimeout(() => {
+        document.getElementById('chart-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else if (item.id === 'stats-comparison') {
+      // Scroll to Summary section
+      setTimeout(() => {
+        document.getElementById('summary-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   const navItems = [
-    { id: 'hero', label: 'Dashboard', icon: ChartLine },
     { id: 'sales-graph', label: 'Sales Analytics', icon: TrendUp },
-    { id: 'ai-chatbot', label: 'AI Assistant', icon: Robot },
-    { id: 'top-products', label: 'Top Products', icon: Trophy },
+    { id: 'ai-chatbot', label: 'Predictions', icon: Robot },
+    { id: 'top-products', label: 'See products', icon: Trophy },
     { id: 'stats-comparison', label: 'Performance', icon: ChartLine },
   ];
 
@@ -44,7 +60,7 @@ const Sidebar = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavClick(item)}
                   className={`nav-button ${isVisible ? 'fade-in' : ''}`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -72,7 +88,7 @@ const Sidebar = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item)}
                 className={`nav-link ${isVisible ? 'fade-in' : ''}`}
                 style={{ animationDelay: `${(index + 1) * 100}ms` }}
               >
