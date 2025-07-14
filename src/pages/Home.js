@@ -13,7 +13,7 @@ const Home = () => {
   const [allChartData, setAllChartData] = useState([]);
   const fetchSummary = async () => {
       try {
-        const resp = await fetch('http://localhost:5000/api/admin/sales/summary', {
+        const resp = await fetch('https://walmart-back.onrender.com/api/admin/sales/summary', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ const Home = () => {
 
   const fetchAllData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/admin/sales/product-trends?range=180`);
+        const res = await fetch(`https://walmart-back.onrender.com/api/admin/sales/product-trends?range=180`);
         const json = await res.json();
 
         const products = new Set();

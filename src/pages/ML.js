@@ -15,7 +15,7 @@ const ML = () => {
   useEffect(() => {
     const fetchProductsAndPredictions = async () => {
       try {
-        const productRes = await fetch('http://localhost:5000/api/admin/products');
+        const productRes = await fetch('https://walmart-back.onrender.com/api/admin/products');
         const productData = await productRes.json();
         setProducts(productData);
 
@@ -24,7 +24,7 @@ const ML = () => {
 
         await Promise.all(
           productData.map(async (product) => {
-            const res = await fetch(`http://127.0.0.1:8000/predict/${product._id}`);
+            const res = await fetch(`https://walmart-ml.onrender.com/predict/${product._id}`);
             const result = await res.json();
             // console.log(`Predictions for ${product.name}:`, result);
             predictionMap[product._id] = result;
@@ -49,7 +49,7 @@ const ML = () => {
 
   const handleRestock = async (productId, amount) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/restock/${productId}`, {
+      const res = await fetch(`https://walmart-back.onrender.com/api/admin/restock/${productId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount }),

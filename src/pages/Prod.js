@@ -29,7 +29,7 @@ const Prod = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/admin/products');
+        const res = await fetch('https://walmart-back.onrender.com/api/admin/products');
         const data = await res.json();
         setProducts(data);
       } catch (err) {
