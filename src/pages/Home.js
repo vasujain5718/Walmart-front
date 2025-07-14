@@ -3,14 +3,54 @@ import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
 import Chart from '../components/Chart';
 import Summary from '../components/Summary';
+import Chatbot from '../components/Chatbot';
 
 const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAlert, setShowAlert] = useState(true);
+  const [summaryData, setSummaryData] = useState(null);
+  const [productOptions, setProductOptions] = useState(['all']);
+  const [allChartData, setAllChartData] = useState([]);
+  const fetchSummary = async () => {
+      try {
+        const resp = await fetch('http://localhost:5000/api/admin/sales/summary', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const result = await resp.json();
+        console.log('Summary data:', result);
+        setSummaryData(result);
+        // console.log(result.categoryShare)
+      } catch (err) {
+        console.error('Failed to fetch summary', err);
+      }
+    };
+
+  const fetchAllData = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/admin/sales/product-trends?range=180`);
+        const json = await res.json();
+
+        const products = new Set();
+        json.forEach(day => {
+          Object.keys(day).forEach(key => {
+            if (key !== 'date') products.add(key);
+          });
+        });
+
+        setProductOptions(['all', ...Array.from(products)]);
+        setAllChartData(json);
+      } catch (err) {
+        console.error('Error fetching sales data:', err);
+      }
+    };
 
   useEffect(() => {
     setIsLoaded(true);
-
+    fetchSummary();
+    fetchAllData();
     // Scroll animation setup
     const observerOptions = {
       threshold: 0.1,
@@ -130,11 +170,12 @@ const Home = () => {
           }}
         >
           <div className="scroll-fade-in" id="chart-section">
-            <Chart />
+            <Chart productOptions={productOptions} allChartData={allChartData} />
           </div>
           <div className="scroll-fade-in" id="summary-section">
-            <Summary />
+            <Summary data={summaryData}/>
           </div>
+          <Chatbot summaryData={summaryData} allChartData={allChartData} />
         </div>
       </main>
     </div>

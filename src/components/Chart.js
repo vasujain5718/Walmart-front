@@ -17,35 +17,12 @@ const RANGE_OPTIONS = [
 
 const HIGHLIGHT_COLOR = '#39E0C7';
 
-const SalesAnalyticsChart = () => {
+const SalesAnalyticsChart = ({productOptions, allChartData}) => {
   const [range, setRange] = useState(7);
   const [selectedProduct, setSelectedProduct] = useState('all');
-  const [productOptions, setProductOptions] = useState(['all']);
-  const [allChartData, setAllChartData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        const res = await fetch(`https://walmart-back.onrender.com/api/admin/sales/product-trends?range=180`);
-        const json = await res.json();
-
-        const products = new Set();
-        json.forEach(day => {
-          Object.keys(day).forEach(key => {
-            if (key !== 'date') products.add(key);
-          });
-        });
-
-        setProductOptions(['all', ...Array.from(products)]);
-        setAllChartData(json);
-      } catch (err) {
-        console.error('Error fetching sales data:', err);
-      }
-    };
-
-    fetchAllData();
-  }, []);
+  
 
   useEffect(() => {
     const fromDate = new Date();

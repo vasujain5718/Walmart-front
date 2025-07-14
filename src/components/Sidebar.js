@@ -1,4 +1,9 @@
-import { ChartLine, Robot, Trophy, TrendUp } from "phosphor-react";
+import {
+  ChartBar,
+  Brain,
+  ShoppingCart,
+  Activity,
+} from "phosphor-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import './Sidebar.css';
@@ -24,19 +29,16 @@ const Sidebar = () => {
     };
   }, []);
 
-  // Custom handler for navigation and scrolling
   const handleNavClick = (item) => {
     if (item.id === 'ai-chatbot') {
       window.open('/ml', '_blank');
     } else if (item.id === 'top-products') {
       window.open('/prod', '_blank');
     } else if (item.id === 'sales-graph') {
-      // Scroll to Chart section
       setTimeout(() => {
         document.getElementById('chart-section')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else if (item.id === 'stats-comparison') {
-      // Scroll to Summary section
       setTimeout(() => {
         document.getElementById('summary-section')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
@@ -44,10 +46,10 @@ const Sidebar = () => {
   };
 
   const navItems = [
-    { id: 'sales-graph', label: 'Sales Analytics', icon: TrendUp },
-    { id: 'ai-chatbot', label: 'Predictions', icon: Robot },
-    { id: 'top-products', label: 'See products', icon: Trophy },
-    { id: 'stats-comparison', label: 'Performance', icon: ChartLine },
+    { id: 'sales-graph', label: 'Sales Analytics', icon: ChartBar },
+    { id: 'ai-chatbot', label: 'Predictions', icon: Brain },
+    { id: 'top-products', label: 'See Products', icon: ShoppingCart },
+    { id: 'stats-comparison', label: 'Performance', icon: Activity },
   ];
 
   if (isMobile) {

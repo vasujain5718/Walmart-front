@@ -2,33 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import './Summary.css';
 
-const Summary = () => {
-  const [data, setData] = useState(null);
+const Summary = ({data}) => {
+  
 
-  useEffect(() => {
-    const fetchSummary = async () => {
-      try {
-        const resp = await fetch('https://walmart-back.onrender.com/api/admin/sales/summary', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        const result = await resp.json();
-        // console.log('Summary data:', result);
-        setData(result);
-        // console.log(result.categoryShare)
-      } catch (err) {
-        console.error('Failed to fetch summary', err);
-      }
-    };
-    fetchSummary();
-  }, []);
-
-  if (!data) return <p style={{ color: 'white' }}>Loading summary...</p>;
+  
 
   const pieColors = ['#39E0C7', '#2CC4B3', '#1FA89A', '#167C76', '#0F4F4C'];
-
+  if(data===null) {
+    return <div className="loading">Loading...</div>;
+  }
   return (
     <div className="summary-container">
       <div className="stats-cards">
@@ -96,11 +78,11 @@ const Summary = () => {
                 formatter={(value, name) => [`₹${Number(value).toLocaleString()}`, name]}
                 contentStyle={{ backgroundColor: 'rgb(255,255,255,0.95)', border: 'none', color: '#fff' }}
               />
-              <Legend
+              {/* <Legend
                 verticalAlign="bottom"
                 height={36}
                 wrapperStyle={{ color: 'white', fontSize: '14px' }}
-              />
+              /> */}
             </PieChart>
           </ResponsiveContainer>
         </div>
